@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} h-full antialiased`}
+      className={`${plusJakartaSans.variable} dark h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background">
         <ReduxProvider>
