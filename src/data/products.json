@@ -1,0 +1,140 @@
+[
+  {
+    "id": "1",
+    "name": "Premium Wireless Headphones",
+    "price": 199.99,
+    "originalPrice": 249.99,
+    "image": "https://picsum.photos/seed/headphones/600/400",
+    "category": "Electronics",
+    "description": "Crystal-clear audio with active noise cancellation, 30-hour battery, and premium comfort for all-day listening.",
+    "rating": 4.8,
+    "reviews": 2847,
+    "badge": "Best Seller"
+  },
+  {
+    "id": "2",
+    "name": "Smart Watch Pro X",
+    "price": 349.99,
+    "originalPrice": 429.99,
+    "image": "https://picsum.photos/seed/smartwatch/600/400",
+    "category": "Electronics",
+    "description": "Advanced health tracking, GPS, AMOLED display, and 7-day battery life in a sleek titanium design.",
+    "rating": 4.7,
+    "reviews": 1923,
+    "badge": "Hot"
+  },
+  {
+    "id": "3",
+    "name": "True Wireless Earbuds",
+    "price": 129.99,
+    "originalPrice": 159.99,
+    "image": "https://picsum.photos/seed/earbuds/600/400",
+    "category": "Electronics",
+    "description": "Immersive sound with adaptive ANC, 36-hour total playtime, and IPX5 water resistance for any lifestyle.",
+    "rating": 4.6,
+    "reviews": 3412,
+    "badge": "Sale"
+  },
+  {
+    "id": "4",
+    "name": "Mechanical Keyboard TKL",
+    "price": 149.99,
+    "image": "https://picsum.photos/seed/keyboard/600/400",
+    "category": "Electronics",
+    "description": "Tenkeyless layout with hot-swappable switches, per-key RGB, and aircraft-grade aluminum body.",
+    "rating": 4.9,
+    "reviews": 891,
+    "badge": "New"
+  },
+  {
+    "id": "5",
+    "name": "Italian Leather Wallet",
+    "price": 89.99,
+    "originalPrice": 119.99,
+    "image": "https://picsum.photos/seed/wallet/600/400",
+    "category": "Fashion",
+    "description": "Slim bifold wallet crafted from full-grain Italian leather. RFID blocking with 8 card slots.",
+    "rating": 4.5,
+    "reviews": 658,
+    "badge": "Sale"
+  },
+  {
+    "id": "6",
+    "name": "Polarized Aviator Sunglasses",
+    "price": 74.99,
+    "image": "https://picsum.photos/seed/sunglasses/600/400",
+    "category": "Fashion",
+    "description": "UV400 polarized lenses in lightweight titanium frames. Reduces glare and eye strain all day long.",
+    "rating": 4.4,
+    "reviews": 1102
+  },
+  {
+    "id": "7",
+    "name": "Barista Pro Coffee Maker",
+    "price": 289.99,
+    "originalPrice": 359.99,
+    "image": "https://picsum.photos/seed/coffee/600/400",
+    "category": "Home",
+    "description": "15-bar pressure espresso machine with built-in burr grinder and milk frother. Café quality at home.",
+    "rating": 4.7,
+    "reviews": 2234,
+    "badge": "Best Seller"
+  },
+  {
+    "id": "8",
+    "name": "Nordic Minimalist Desk Lamp",
+    "price": 59.99,
+    "image": "https://picsum.photos/seed/desklamp/600/400",
+    "category": "Home",
+    "description": "Adjustable LED lamp with 5 color temperatures, wireless charging base, and touch dimmer control.",
+    "rating": 4.6,
+    "reviews": 743,
+    "badge": "New"
+  },
+  {
+    "id": "9",
+    "name": "Luxury Merino Throw Blanket",
+    "price": 109.99,
+    "originalPrice": 139.99,
+    "image": "https://picsum.photos/seed/blanket/600/400",
+    "category": "Home",
+    "description": "Ultra-soft 100% Merino wool throw. Naturally temperature-regulating and hypoallergenic.",
+    "rating": 4.8,
+    "reviews": 519
+  },
+  {
+    "id": "10",
+    "name": "Professional Yoga Mat 6mm",
+    "price": 69.99,
+    "originalPrice": 89.99,
+    "image": "https://picsum.photos/seed/yogamat/600/400",
+    "category": "Sports",
+    "description": "Extra-thick non-slip eco-friendly TPE mat with alignment lines and carrying strap included.",
+    "rating": 4.7,
+    "reviews": 1876,
+    "badge": "Hot"
+  },
+  {
+    "id": "11",
+    "name": "Insulated Hydro Flask 40oz",
+    "price": 44.99,
+    "image": "https://picsum.photos/seed/waterbottle/600/400",
+    "category": "Sports",
+    "description": "Triple-wall vacuum insulation keeps drinks cold 24hrs, hot 12hrs. Leak-proof and BPA-free.",
+    "rating": 4.9,
+    "reviews": 4201,
+    "badge": "Best Seller"
+  },
+  {
+    "id": "12",
+    "name": "Atomic Habits – Special Edition",
+    "price": 24.99,
+    "originalPrice": 32.99,
+    "image": "https://picsum.photos/seed/book/600/400",
+    "category": "Books",
+    "description": "James Clear's #1 bestseller on building good habits. Hardcover special edition with exclusive illustrations.",
+    "rating": 4.9,
+    "reviews": 18432,
+    "badge": "Best Seller"
+  }
+]
