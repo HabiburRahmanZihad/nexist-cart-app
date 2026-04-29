@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { Camera, Code2, MessageSquare, Sparkles } from "lucide-react";
+import { Code2, MessageSquare, Camera, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const NAV_LINKS = [
@@ -9,12 +9,12 @@ const NAV_LINKS = [
   { label: "About", href: "/about" },
 ];
 
-const CATEGORIES = [
-  { label: "Electronics", href: "/products?category=Electronics" },
-  { label: "Fashion", href: "/products?category=Fashion" },
-  { label: "Home", href: "/products?category=Home" },
-  { label: "Sports", href: "/products?category=Sports" },
-  { label: "Books", href: "/products?category=Books" },
+const SERVICES = [
+  { label: "LMS Development", href: "/about" },
+  { label: "Custom Software", href: "/about" },
+  { label: "Web Applications", href: "/about" },
+  { label: "API Development", href: "/about" },
+  { label: "UI/UX Design", href: "/about" },
 ];
 
 export function Footer() {
@@ -31,8 +31,9 @@ export function Footer() {
               <span className="text-xl font-bold">Nexist</span>
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Curated premium products for modern living. Quality you can trust,
-              delivered to your door.
+              Scalable LMS &amp; Cutting-Edge Software. We empower businesses
+              and educators through innovative digital platforms and custom
+              software solutions.
             </p>
             <div className="mt-5 flex items-center gap-3">
               {[
@@ -71,38 +72,42 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Categories */}
+          {/* Services */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
-              Categories
+              Our Services
             </h4>
             <ul className="space-y-2.5">
-              {CATEGORIES.map((cat) => (
-                <li key={cat.href}>
+              {SERVICES.map((s) => (
+                <li key={s.label}>
                   <Link
-                    href={cat.href}
+                    href={s.href}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    {cat.label}
+                    {s.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Support */}
+          {/* Contact */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
-              Support
+              Get in Touch
             </h4>
             <ul className="space-y-2.5">
-              {[
-                "FAQ",
-                "Shipping Policy",
-                "Returns & Refunds",
-                "Track Order",
-                "Contact Us",
-              ].map((item) => (
+              <li>
+                <a
+                  href="https://www.nexist.info"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  nexist.info
+                </a>
+              </li>
+              {["Support", "Partnerships", "Careers", "Blog"].map((item) => (
                 <li key={item}>
                   <span className="cursor-pointer text-sm text-muted-foreground transition-colors hover:text-foreground">
                     {item}
@@ -120,7 +125,8 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Nexist. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
-            Built with Next.js, TypeScript & Redux Toolkit
+            Scalable LMS &amp; Cutting-Edge Software &mdash; Built with
+            Next.js, TypeScript &amp; Redux Toolkit
           </p>
         </div>
       </div>

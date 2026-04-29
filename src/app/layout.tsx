@@ -1,11 +1,11 @@
+import { CartSidebar } from "@/components/cart/CartSidebar";
+import { Footer } from "@/components/shared/Footer";
+import { Navbar } from "@/components/shared/Navbar";
+import { Toaster } from "@/components/ui/sonner";
+import { ReduxProvider } from "@/providers/ReduxProvider";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { ReduxProvider } from "@/providers/ReduxProvider";
-import { Toaster } from "@/components/ui/sonner";
-import { Navbar } from "@/components/shared/Navbar";
-import { Footer } from "@/components/shared/Footer";
-import { CartSidebar } from "@/components/cart/CartSidebar";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -15,9 +15,13 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Nexist — Premium Shopping",
+  title: {
+    default: "Nexist — Scalable LMS & Cutting-Edge Software",
+    template: "%s — Nexist",
+  },
   description:
-    "A curated collection of premium products. Add to cart, manage your selections, and shop with confidence.",
+    "Nexist builds scalable Learning Management Systems and cutting-edge custom software for businesses and educators worldwide. Empowering digital transformation through innovative technology.",
+  keywords: ["LMS", "custom software", "e-learning", "digital transformation", "Next.js", "TypeScript"],
 };
 
 export default function RootLayout({
