@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, SlidersHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { ProductCard } from "./ProductCard";
-import { Category, Product } from "@/types";
 import productsData from "@/data/products.json";
+import { Category, Product } from "@/types";
+import { AnimatePresence, motion } from "framer-motion";
+import { Search, SlidersHorizontal } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ProductCard } from "./ProductCard";
 
 const products = productsData as Product[];
 
@@ -19,9 +19,18 @@ const CATEGORIES: Category[] = [
   "Books",
 ];
 
-export function ProductGrid() {
+interface ProductGridProps {
+  initialCategory?: string;
+}
+
+export function ProductGrid({ initialCategory }: ProductGridProps) {
+  const resolvedCategory =
+    initialCategory && (CATEGORIES as string[]).includes(initialCategory)
+      ? (initialCategory as Category)
+      : "All";
+
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [activeCategory, setActiveCategory] = useState<Category>(resolvedCategory);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
@@ -70,11 +79,10 @@ export function ProductGrid() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all ${
-                activeCategory === cat
+              className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all ${activeCategory === cat
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              }`}
+                }`}
             >
               {cat}
             </button>
