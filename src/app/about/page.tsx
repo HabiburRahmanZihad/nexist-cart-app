@@ -266,7 +266,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <SectionReveal>
-              <div className="relative overflow-hidden rounded-3xl" style={{ aspectRatio: "4/3" }}>
+              <div className="relative aspect-4/3 overflow-hidden rounded-3xl">
                 <Image
                   src="https://picsum.photos/seed/nexist-mission/800/600"
                   alt="Nexist mission — building scalable software"

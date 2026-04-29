@@ -33,11 +33,11 @@ export function NewsletterCTA() {
           </div>
 
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Stay in the loop
+            Stay ahead with Nexist
           </h2>
           <p className="mx-auto mt-3 max-w-md text-base text-white/70">
-            Get early access to new arrivals, exclusive deals, and insider
-            picks. Join 10,000+ subscribers.
+            New arrivals, exclusive deals, and insights from the team behind
+            scalable LMS &amp; cutting-edge software. Join 10,000+ subscribers.
           </p>
 
           {submitted ? (

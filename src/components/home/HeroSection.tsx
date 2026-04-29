@@ -16,7 +16,7 @@ const HERO_IMAGES = [
 
 const TRUST_BADGES = [
   { Icon: Truck, label: "Free Shipping over $100" },
-  { Icon: ShieldCheck, label: "Quality Guaranteed" },
+  { Icon: ShieldCheck, label: "Curated & Quality-Checked" },
   { Icon: RotateCcw, label: "30-Day Returns" },
 ];
 
@@ -114,8 +114,7 @@ export function HeroSection() {
               key={alt}
               whileHover={{ scale: 1.04 }}
               transition={{ duration: 0.25 }}
-              className={`relative overflow-hidden rounded-2xl bg-muted shadow-lg ${i === 1 ? "mt-6" : ""} ${i === 3 ? "-mt-6" : ""}`}
-              style={{ aspectRatio: "1/1" }}
+              className={`relative aspect-square overflow-hidden rounded-2xl bg-muted shadow-lg ${i === 1 ? "mt-6" : ""} ${i === 3 ? "-mt-6" : ""}`}
             >
               <Image
                 src={src}

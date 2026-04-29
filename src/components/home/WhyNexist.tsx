@@ -9,29 +9,29 @@ const FEATURES = [
     Icon: Truck,
     title: "Free Shipping",
     description:
-      "Free delivery on all orders over $100. Express shipping available at checkout.",
-    color: "bg-violet-100 text-violet-700",
+      "Free delivery on all orders over $100. Express shipping available at checkout for time-sensitive needs.",
+    color: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
   },
   {
     Icon: ShieldCheck,
-    title: "Quality Guarantee",
+    title: "Quality Guaranteed",
     description:
-      "Every product is hand-vetted. We only stock items we would use ourselves.",
-    color: "bg-emerald-100 text-emerald-700",
+      "Every product is hand-vetted by our team. We partner with trusted suppliers and back every order with our quality promise.",
+    color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
   },
   {
     Icon: RotateCcw,
     title: "30-Day Returns",
     description:
-      "Not happy? Return anything within 30 days, no questions asked, full refund.",
-    color: "bg-amber-100 text-amber-700",
+      "Not satisfied? Return anything within 30 days, no questions asked. Full refund, hassle-free.",
+    color: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
   },
   {
     Icon: Headphones,
-    title: "24/7 Support",
+    title: "Expert Support",
     description:
-      "Our expert team is always available to help you find the perfect product.",
-    color: "bg-rose-100 text-rose-700",
+      "Our dedicated support team is available around the clock to help you find the right product and resolve any issue.",
+    color: "bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300",
   },
 ];
 
@@ -41,14 +41,15 @@ export function WhyNexist() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionReveal className="mb-12 text-center">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Why Choose Us
+            The Nexist Difference
           </span>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Shopping made simple
+            Built around your experience
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            We take care of everything so you can focus on what matters —
-            finding products you love.
+            From the same team behind scalable LMS platforms and enterprise
+            software — we bring the same engineering rigour to every shopping
+            experience.
           </p>
         </SectionReveal>
 
