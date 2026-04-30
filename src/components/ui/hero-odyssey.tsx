@@ -194,7 +194,7 @@ const Lightning: React.FC<LightningProps> = ({
 };
 
 const FeatureItem: React.FC<FeatureItemProps> = ({ name, value, position }) => (
-  <div className={`absolute ${position} z-10 group transition-all duration-300 hover:scale-110`}>
+  <div className={`hidden md:block absolute ${position} z-10 group transition-all duration-300 hover:scale-110`}>
     <div className="flex items-center gap-2 relative">
       <div className="relative">
         <div className="w-2 h-2 bg-white rounded-full group-hover:animate-pulse" />
@@ -223,10 +223,10 @@ const itemVariants = {
 };
 
 const FEATURES = [
-  { name: "48+ Products", value: "curated selection", position: "left-0 sm:left-10 top-36" },
-  { name: "Free Shipping", value: "on orders $100+", position: "left-1/4 top-20" },
-  { name: "30-Day Returns", value: "hassle-free", position: "right-1/4 top-20" },
-  { name: "4.8★ Rating", value: "10K+ customers", position: "right-0 sm:right-10 top-36" },
+  { name: "48+ Products", value: "curated selection", position: "left-0 lg:left-10 top-36" },
+  { name: "Free Shipping", value: "on orders $100+", position: "left-[22%] top-20" },
+  { name: "30-Day Returns", value: "hassle-free", position: "right-[22%] top-20" },
+  { name: "4.8★ Rating", value: "10K+ customers", position: "right-0 lg:right-10 top-36" },
 ];
 
 export function HeroOdyssey() {
@@ -240,7 +240,7 @@ export function HeroOdyssey() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full z-10 top-[28%] relative flex-1"
+          className="w-full z-10 relative md:top-[28%] md:flex-1"
         >
           {FEATURES.map((f) => (
             <motion.div key={f.name} variants={itemVariants}>
@@ -254,45 +254,58 @@ export function HeroOdyssey() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-30 flex flex-col items-center text-center max-w-4xl mx-auto pb-16"
+          className="relative z-30 flex flex-col items-center text-center max-w-4xl mx-auto flex-1 md:flex-none justify-center md:justify-start pb-8 md:pb-16"
         >
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-full text-sm mb-6 border border-white/10"
+            className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm mb-4 sm:mb-6 border border-white/10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>New arrivals — 48+ premium products</span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-light mb-2 tracking-tight">
+          <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-2 tracking-tight">
             Nexist
           </motion.h1>
 
           <motion.h2
             variants={itemVariants}
-            className="text-2xl md:text-4xl pb-3 font-light bg-linear-to-r from-gray-100 via-gray-200 to-gray-300 bg-clip-text text-transparent"
+            className="text-lg sm:text-2xl md:text-3xl lg:text-4xl pb-3 font-light bg-linear-to-r from-gray-100 via-gray-200 to-gray-300 bg-clip-text text-transparent"
           >
             Premium Shopping Experience
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="text-gray-400 mb-9 max-w-2xl">
+          <motion.p variants={itemVariants} className="text-gray-400 text-sm sm:text-base mb-7 sm:mb-9 max-w-2xl px-2">
             Discover a curated collection of premium products — electronics, fashion, home, sports, and books.
             Every item handpicked for quality and value.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-4">
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full px-2">
             <Link
               href="/products"
-              className="px-8 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-colors"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-black text-sm sm:text-base font-medium rounded-full hover:bg-white/90 transition-colors"
             >
               Shop All Products
             </Link>
             <Link
               href="/collections"
-              className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-colors border border-white/20"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-colors border border-white/20 text-sm sm:text-base"
             >
               Browse Collections
             </Link>
+          </motion.div>
+
+          {/* Mobile feature stats */}
+          <motion.div variants={itemVariants} className="md:hidden grid grid-cols-2 gap-2 w-full max-w-xs mt-6">
+            {FEATURES.map((f) => (
+              <div key={f.name} className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/10">
+                <div className="w-1.5 h-1.5 bg-white rounded-full shrink-0" />
+                <div className="text-left">
+                  <div className="text-white text-xs font-medium leading-tight">{f.name}</div>
+                  <div className="text-white/60 text-xs">{f.value}</div>
+                </div>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
