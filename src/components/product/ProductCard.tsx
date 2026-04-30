@@ -78,19 +78,20 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
             inCart && "border-emerald-500/30 shadow-lg shadow-emerald-500/5"
           )}
         >
-          {/* Image */}
-          <div className="relative w-40 shrink-0 overflow-hidden bg-muted sm:w-52">
+          {/* Image — compact on mobile, wider on sm+ */}
+          <div className="relative w-24 shrink-0 overflow-hidden bg-muted sm:w-44 md:w-52">
             <Image
               src={product.image}
               alt={product.name}
               fill
-              sizes="208px"
+              sizes="(max-width: 640px) 96px, (max-width: 768px) 176px, 208px"
               priority={index === 0}
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
+            {/* Badge — only on sm+ where there's room */}
             {badgeConf && product.badge && (
-              <div className="absolute left-2.5 top-2.5">
-                <span className={cn("flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold backdrop-blur-sm", badgeConf.pill)}>
+              <div className="absolute left-2 top-2 hidden sm:block">
+                <span className={cn("flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold backdrop-blur-sm", badgeConf.pill)}>
                   <span className={cn("h-1.5 w-1.5 rounded-full animate-pulse", badgeConf.dot)} />
                   {product.badge}
                 </span>
@@ -99,28 +100,49 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
           </div>
 
           {/* Content */}
-          <div className="flex flex-1 flex-col justify-between gap-3 p-4 sm:p-5">
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex-1 space-y-2">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
+          <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 p-3 sm:gap-3 sm:p-5">
+            {/* Top: info + wishlist */}
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0 flex-1 space-y-1 sm:space-y-2">
+                {/* Pills row */}
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="rounded bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground sm:text-xs">
                     {product.category}
                   </span>
                   {discount && (
-                    <span className="rounded-full bg-primary/90 px-2.5 py-0.5 text-xs font-bold text-primary-foreground">
+                    <span className="rounded-full bg-primary/90 px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground sm:text-xs">
                       -{discount}%
                     </span>
                   )}
+                  {/* Show badge inline on mobile since image overlay is hidden */}
+                  {badgeConf && product.badge && (
+                    <span className={cn("flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-semibold sm:hidden", badgeConf.pill)}>
+                      {product.badge}
+                    </span>
+                  )}
                 </div>
-                <h3 className="font-semibold leading-snug text-foreground transition-colors duration-200 group-hover:text-primary">
+
+                {/* Name */}
+                <h3 className="line-clamp-2 text-xs font-semibold leading-snug text-foreground transition-colors duration-200 group-hover:text-primary sm:text-sm">
                   {product.name}
                 </h3>
-                <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+
+                {/* Description — hidden on mobile, shown on sm+ */}
+                <p className="hidden line-clamp-2 text-sm leading-relaxed text-muted-foreground sm:block">
                   {product.description}
                 </p>
+
+                {/* Rating */}
+                <div className="flex items-center gap-1">
+                  <Star className="h-3 w-3 fill-amber-400 text-amber-400 sm:h-3.5 sm:w-3.5" />
+                  <span className="text-xs font-medium">{product.rating}</span>
+                  <span className="hidden text-xs text-muted-foreground sm:inline">
+                    ({product.reviews.toLocaleString()})
+                  </span>
+                </div>
               </div>
 
-              {/* Wishlist toggle */}
+              {/* Wishlist */}
               <motion.button
                 type="button"
                 whileTap={{ scale: 0.82 }}
@@ -132,39 +154,45 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
               </motion.button>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className={cn("h-3.5 w-3.5", i < Math.round(product.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted-foreground/30")} />
-                ))}
-                <span className="ml-1 text-sm font-medium">{product.rating}</span>
-                <span className="text-xs text-muted-foreground">({product.reviews.toLocaleString()})</span>
+            {/* Bottom: price + CTA */}
+            <div className="flex items-center justify-between gap-2 border-t border-border/40 pt-2 sm:pt-3">
+              <div className="flex flex-col">
+                <span className="text-sm font-extrabold text-foreground sm:text-lg">
+                  ${product.price.toFixed(2)}
+                </span>
+                {product.originalPrice && (
+                  <span className="text-[10px] text-muted-foreground line-through sm:text-xs">
+                    ${product.originalPrice.toFixed(2)}
+                  </span>
+                )}
               </div>
 
-              <div className="flex items-center gap-4">
-                <div>
-                  <span className="text-xl font-extrabold text-foreground">${product.price.toFixed(2)}</span>
-                  {product.originalPrice && (
-                    <span className="ml-2 text-sm text-muted-foreground line-through">${product.originalPrice.toFixed(2)}</span>
-                  )}
-                </div>
-                <motion.button
-                  type="button"
-                  whileTap={{ scale: 0.93 }}
-                  onClick={handleAddToCart}
-                  disabled={inCart}
-                  className={cn(
-                    "flex h-9 items-center gap-2 rounded-xl px-4 text-sm font-semibold transition-all duration-200",
-                    inCart
-                      ? "bg-emerald-500/15 text-emerald-400 cursor-default"
-                      : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
-                  )}
-                >
-                  {inCart
-                    ? <><Check className="h-4 w-4" /> In Cart</>
-                    : <><ShoppingCart className="h-4 w-4" /> Add to Cart</>}
-                </motion.button>
-              </div>
+              <motion.button
+                type="button"
+                whileTap={{ scale: 0.93 }}
+                onClick={handleAddToCart}
+                disabled={inCart}
+                className={cn(
+                  "flex h-8 shrink-0 items-center gap-1.5 rounded-xl px-3 text-xs font-semibold transition-all duration-200 sm:h-9 sm:px-4 sm:text-sm",
+                  inCart
+                    ? "bg-emerald-500/15 text-emerald-400 cursor-default"
+                    : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
+                )}
+              >
+                {inCart ? (
+                  <>
+                    <Check className="h-3.5 w-3.5" />
+                    <span className="hidden sm:inline">In Cart</span>
+                    <span className="sm:hidden">Added</span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="h-3.5 w-3.5" />
+                    <span className="hidden sm:inline">Add to Cart</span>
+                    <span className="sm:hidden">Add</span>
+                  </>
+                )}
+              </motion.button>
             </div>
           </div>
         </div>
