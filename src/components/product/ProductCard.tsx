@@ -1,13 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import { Check, Heart, ShoppingCart, Star, Zap } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { toast } from "sonner";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
-import { Product } from "@/types";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types";
+import { AnimatePresence, motion } from "framer-motion";
+import { Check, Heart, ShoppingCart, Star, Zap } from "lucide-react";
+import Image from "next/image";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;

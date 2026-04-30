@@ -1,15 +1,15 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import {
-  toggleWishlistItem,
-  removeFromWishlist,
   clearWishlist,
-  toggleWishlist,
+  removeFromWishlist,
   setWishlistOpen,
+  toggleWishlist,
+  toggleWishlistItem,
 } from "@/redux/wishlistSlice";
 import { Product } from "@/types";
+import { useDispatch, useSelector } from "react-redux";
 
 export function useWishlist() {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { hydrate } from "@/redux/cartSlice";
+import { AppDispatch } from "@/redux/store";
 import { hydrateWishlist } from "@/redux/wishlistSlice";
 import { CartItem, Product } from "@/types";
-import { AppDispatch } from "@/redux/store";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // Loads persisted cart + wishlist from localStorage once on client mount.
 export function CartHydration() {

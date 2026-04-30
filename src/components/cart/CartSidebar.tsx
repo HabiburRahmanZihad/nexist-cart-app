@@ -1,19 +1,19 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
-import { ShoppingCart, Trash2, CreditCard } from "lucide-react";
-import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/hooks/useCart";
+import { AnimatePresence } from "framer-motion";
+import { CreditCard, ShoppingCart, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { CartItem } from "./CartItem";
 import { EmptyCart } from "./EmptyCart";
-import { useCart } from "@/hooks/useCart";
 
 const SHIPPING_THRESHOLD = 100;
 

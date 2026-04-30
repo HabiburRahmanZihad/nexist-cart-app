@@ -1,21 +1,21 @@
 "use client";
 
-import Image from "next/image";
-import { Heart, Trash2, ShoppingCart, X, HeartOff } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { useWishlist } from "@/hooks/useWishlist";
 import { useCart } from "@/hooks/useCart";
-import { Product } from "@/types";
+import { useWishlist } from "@/hooks/useWishlist";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types";
+import { AnimatePresence, motion } from "framer-motion";
+import { Heart, HeartOff, ShoppingCart, Trash2, X } from "lucide-react";
+import Image from "next/image";
+import { toast } from "sonner";
 
 export function WishlistSidebar() {
   const { items, isOpen, setWishlistOpen, removeFromWishlist, clearWishlist, totalItems } =

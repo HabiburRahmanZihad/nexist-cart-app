@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/useCart";
+import { motion } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
 
 export function EmptyCart() {
   const { setCartOpen } = useCart();

@@ -1,7 +1,7 @@
+import { CartItem, Product } from "@/types";
 import { configureStore, Middleware } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
 import wishlistReducer from "./wishlistSlice";
-import { CartItem, Product } from "@/types";
 
 const CART_KEY = "nexist-cart";
 const WISHLIST_KEY = "nexist-wishlist";

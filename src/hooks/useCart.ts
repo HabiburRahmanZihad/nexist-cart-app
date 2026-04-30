@@ -1,16 +1,16 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "@/redux/store";
 import {
   addToCart,
-  removeFromCart,
-  updateQuantity,
   clearCart,
-  toggleCart,
+  removeFromCart,
   setCartOpen,
+  toggleCart,
+  updateQuantity,
 } from "@/redux/cartSlice";
+import { AppDispatch, RootState } from "@/redux/store";
 import { Product } from "@/types";
+import { useDispatch, useSelector } from "react-redux";
 
 export function useCart() {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,13 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import { Minus, Plus, Trash2 } from "lucide-react";
-import { motion } from "framer-motion";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/hooks/useCart";
 import { CartItem as CartItemType } from "@/types";
+import { motion } from "framer-motion";
+import { Minus, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { toast } from "sonner";
 
 interface CartItemProps {
   item: CartItemType;

@@ -1,8 +1,8 @@
 import { CartSidebar } from "@/components/cart/CartSidebar";
-import { WishlistSidebar } from "@/components/wishlist/WishlistSidebar";
 import { Footer } from "@/components/shared/Footer";
 import { Navbar } from "@/components/shared/Navbar";
 import { Toaster } from "@/components/ui/sonner";
+import { WishlistSidebar } from "@/components/wishlist/WishlistSidebar";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
