@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   description:
     "Nexist builds scalable Learning Management Systems and cutting-edge custom software for businesses and educators worldwide. Empowering digital transformation through innovative technology.",
   keywords: ["LMS", "custom software", "e-learning", "digital transformation", "Next.js", "TypeScript"],
+  icons: {
+    icon: "https://res.cloudinary.com/dvq3pcykn/image/upload/v1777486297/logo_vnhpx6.jpg",
+    apple: "https://res.cloudinary.com/dvq3pcykn/image/upload/v1777486297/logo_vnhpx6.jpg",
+  },
 };
 
 export default function RootLayout({

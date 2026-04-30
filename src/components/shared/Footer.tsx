@@ -1,6 +1,9 @@
 import { Separator } from "@/components/ui/separator";
-import { Code2, MessageSquare, Camera, Sparkles } from "lucide-react";
+import { Camera, Code2, MessageSquare } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+
+const LOGO_BANNER = "https://res.cloudinary.com/dvq3pcykn/image/upload/v1777486297/logo_with_banner_flogey.jpg";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -24,13 +27,18 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Sparkles className="h-4 w-4 text-primary-foreground" />
+            <Link href="/" className="inline-block">
+              <div className="relative h-9 w-36">
+                <Image
+                  src={LOGO_BANNER}
+                  alt="Nexist"
+                  fill
+                  sizes="144px"
+                  className="object-contain object-left w-full h-full"
+                />
               </div>
-              <span className="text-xl font-bold">Nexist</span>
             </Link>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Scalable LMS &amp; Cutting-Edge Software. We empower businesses
               and educators through innovative digital platforms and custom
               software solutions.
