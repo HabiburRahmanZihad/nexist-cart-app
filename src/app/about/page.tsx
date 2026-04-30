@@ -179,7 +179,7 @@ export default function AboutPage() {
               style={{ aspectRatio: "4/3" }}
             >
               <Image
-                src="https://picsum.photos/seed/nexist-office/800/600"
+                src="https://res.cloudinary.com/dvq3pcykn/image/upload/v1777486297/logo_with_banner_flogey.jpg"
                 alt="Nexist team at work"
                 fill
                 sizes="50vw"
@@ -268,7 +268,7 @@ export default function AboutPage() {
             <SectionReveal>
               <div className="relative aspect-4/3 overflow-hidden rounded-3xl">
                 <Image
-                  src="https://picsum.photos/seed/nexist-mission/800/600"
+                  src="https://res.cloudinary.com/dvq3pcykn/image/upload/v1777486297/logo_with_banner_flogey.jpg"
                   alt="Nexist mission — building scalable software"
                   fill
                   sizes="50vw"

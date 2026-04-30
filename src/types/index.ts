@@ -20,6 +20,11 @@ export interface CartState {
   isOpen: boolean;
 }
 
+export interface WishlistState {
+  items: Product[];
+  isOpen: boolean;
+}
+
 export type Category =
   | "All"
   | "Electronics"

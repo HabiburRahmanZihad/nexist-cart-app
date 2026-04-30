@@ -2,8 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/useCart";
+import { useWishlist } from "@/hooks/useWishlist";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Heart, Menu, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,6 +22,7 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const { totalItems, toggleCart } = useCart();
+  const { totalItems: wishlistCount, toggleWishlist } = useWishlist();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -74,6 +76,31 @@ export function Navbar() {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
+          {/* Wishlist */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleWishlist}
+            className="relative gap-2"
+            aria-label={`Open wishlist, ${wishlistCount} items`}
+          >
+            <Heart className="h-4 w-4" />
+            <span className="hidden sm:inline">Wishlist</span>
+            <AnimatePresence>
+              {wishlistCount > 0 && (
+                <motion.span
+                  key="wbadge"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white shadow"
+                >
+                  {wishlistCount > 99 ? "99+" : wishlistCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Button>
+
           {/* Cart */}
           <Button
             variant="outline"

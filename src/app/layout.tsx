@@ -1,4 +1,5 @@
 import { CartSidebar } from "@/components/cart/CartSidebar";
+import { WishlistSidebar } from "@/components/wishlist/WishlistSidebar";
 import { Footer } from "@/components/shared/Footer";
 import { Navbar } from "@/components/shared/Navbar";
 import { Toaster } from "@/components/ui/sonner";
@@ -38,12 +39,13 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakartaSans.variable} dark h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background">
+      <body suppressHydrationWarning className="flex min-h-full flex-col bg-background">
         <ReduxProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
           <CartSidebar />
+          <WishlistSidebar />
           <Toaster position="bottom-right" richColors />
         </ReduxProvider>
       </body>

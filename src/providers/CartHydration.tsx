@@ -3,26 +3,35 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hydrate } from "@/redux/cartSlice";
-import { CartItem } from "@/types";
+import { hydrateWishlist } from "@/redux/wishlistSlice";
+import { CartItem, Product } from "@/types";
 import { AppDispatch } from "@/redux/store";
 
-// Loads persisted cart from localStorage once on client mount.
-// Runs inside ReduxProvider so dispatch is available.
+// Loads persisted cart + wishlist from localStorage once on client mount.
 export function CartHydration() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    // Cart
     try {
-      const saved = localStorage.getItem("nexist-cart");
-      if (saved) {
-        const items: CartItem[] = JSON.parse(saved);
-        if (Array.isArray(items)) {
-          dispatch(hydrate(items));
-        }
+      const savedCart = localStorage.getItem("nexist-cart");
+      if (savedCart) {
+        const items: CartItem[] = JSON.parse(savedCart);
+        if (Array.isArray(items)) dispatch(hydrate(items));
       }
     } catch {
-      // Corrupt localStorage data — start fresh
       localStorage.removeItem("nexist-cart");
+    }
+
+    // Wishlist
+    try {
+      const savedWishlist = localStorage.getItem("nexist-wishlist");
+      if (savedWishlist) {
+        const items: Product[] = JSON.parse(savedWishlist);
+        if (Array.isArray(items)) dispatch(hydrateWishlist(items));
+      }
+    } catch {
+      localStorage.removeItem("nexist-wishlist");
     }
   }, [dispatch]);
 

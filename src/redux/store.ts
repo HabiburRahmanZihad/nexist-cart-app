@@ -1,25 +1,49 @@
 import { configureStore, Middleware } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
-import { CartItem } from "@/types";
+import wishlistReducer from "./wishlistSlice";
+import { CartItem, Product } from "@/types";
 
-const STORAGE_KEY = "nexist-cart";
+const CART_KEY = "nexist-cart";
+const WISHLIST_KEY = "nexist-wishlist";
 
-// Persist cart items to localStorage on every cart action
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
 
   if (typeof window === "undefined") return result;
 
-  const actionType = (action as { type: string }).type;
+  const type = (action as { type: string }).type;
 
-  if (actionType === "cart/clearCart") {
-    localStorage.removeItem(STORAGE_KEY);
-  } else if (actionType.startsWith("cart/") && actionType !== "cart/hydrate" && actionType !== "cart/toggleCart" && actionType !== "cart/setCartOpen") {
+  // ── Cart persistence ──
+  if (type === "cart/clearCart") {
+    localStorage.removeItem(CART_KEY);
+  } else if (
+    type.startsWith("cart/") &&
+    type !== "cart/hydrate" &&
+    type !== "cart/toggleCart" &&
+    type !== "cart/setCartOpen"
+  ) {
     try {
       const state = store.getState() as { cart: { items: CartItem[] } };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.cart.items));
+      localStorage.setItem(CART_KEY, JSON.stringify(state.cart.items));
     } catch {
-      // Storage quota exceeded — fail silently
+      // Storage quota — fail silently
+    }
+  }
+
+  // ── Wishlist persistence ──
+  if (type === "wishlist/clearWishlist") {
+    localStorage.removeItem(WISHLIST_KEY);
+  } else if (
+    type.startsWith("wishlist/") &&
+    type !== "wishlist/hydrateWishlist" &&
+    type !== "wishlist/toggleWishlist" &&
+    type !== "wishlist/setWishlistOpen"
+  ) {
+    try {
+      const state = store.getState() as { wishlist: { items: Product[] } };
+      localStorage.setItem(WISHLIST_KEY, JSON.stringify(state.wishlist.items));
+    } catch {
+      // Storage quota — fail silently
     }
   }
 
@@ -29,6 +53,7 @@ const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
+    wishlist: wishlistReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware),

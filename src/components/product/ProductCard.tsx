@@ -1,13 +1,13 @@
 "use client";
 
-import { useCart } from "@/hooks/useCart";
-import { cn } from "@/lib/utils";
-import { Product } from "@/types";
-import { AnimatePresence, motion } from "framer-motion";
-import { Check, Heart, ShoppingCart, Star, Zap } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { Check, Heart, ShoppingCart, Star, Zap } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
+import { useCart } from "@/hooks/useCart";
+import { useWishlist } from "@/hooks/useWishlist";
+import { Product } from "@/types";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -29,15 +29,17 @@ const BADGE_CONFIG: Record<string, { pill: string; dot: string }> = {
     dot: "bg-emerald-400",
   },
   Sale: {
-    pill: "bg-violet-500/20 text-black border border-violet-500/30",
+    pill: "bg-violet-500/20 text-violet-300 border border-violet-500/30",
     dot: "bg-violet-400",
   },
 };
 
 export function ProductCard({ product, index, layout = "grid" }: ProductCardProps) {
   const { addToCart, isInCart } = useCart();
+  const { toggleWishlistItem, isInWishlist } = useWishlist();
+
   const inCart = isInCart(product.id);
-  const [wishlisted, setWishlisted] = useState(false);
+  const wishlisted = isInWishlist(product.id);
 
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -46,14 +48,21 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
   const handleAddToCart = () => {
     if (inCart) return;
     addToCart(product);
-    toast.success("Added to cart!", {
-      description: product.name,
-      duration: 2000,
-    });
+    toast.success("Added to cart!", { description: product.name, duration: 2000 });
+  };
+
+  const handleToggleWishlist = () => {
+    toggleWishlistItem(product);
+    if (!wishlisted) {
+      toast.success("Saved to wishlist!", { description: product.name, duration: 1800 });
+    } else {
+      toast.info("Removed from wishlist", { description: product.name, duration: 1800 });
+    }
   };
 
   const badgeConf = product.badge ? BADGE_CONFIG[product.badge] : null;
 
+  /* ── LIST LAYOUT ── */
   if (layout === "list") {
     return (
       <motion.div
@@ -76,6 +85,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
               alt={product.name}
               fill
               sizes="208px"
+              priority={index === 0}
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             {badgeConf && product.badge && (
@@ -109,25 +119,26 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
                   {product.description}
                 </p>
               </div>
-              <button
+
+              {/* Wishlist toggle */}
+              <motion.button
                 type="button"
+                whileTap={{ scale: 0.82 }}
                 aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                onClick={() => setWishlisted((v) => !v)}
+                onClick={handleToggleWishlist}
                 className="shrink-0 rounded-full p-1.5 transition-colors hover:bg-muted"
               >
-                <Heart className={cn("h-4 w-4 transition-colors", wishlisted ? "fill-rose-500 text-rose-500" : "text-muted-foreground")} />
-              </button>
+                <Heart className={cn("h-4 w-4 transition-colors duration-200", wishlisted ? "fill-rose-500 text-rose-500" : "text-muted-foreground")} />
+              </motion.button>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className={cn("h-3.5 w-3.5", i < Math.round(product.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted-foreground/30")} />
-                  ))}
-                  <span className="ml-1 text-sm font-medium">{product.rating}</span>
-                  <span className="text-xs text-muted-foreground">({product.reviews.toLocaleString()})</span>
-                </div>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className={cn("h-3.5 w-3.5", i < Math.round(product.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted-foreground/30")} />
+                ))}
+                <span className="ml-1 text-sm font-medium">{product.rating}</span>
+                <span className="text-xs text-muted-foreground">({product.reviews.toLocaleString()})</span>
               </div>
 
               <div className="flex items-center gap-4">
@@ -138,6 +149,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
                   )}
                 </div>
                 <motion.button
+                  type="button"
                   whileTap={{ scale: 0.93 }}
                   onClick={handleAddToCart}
                   disabled={inCart}
@@ -148,7 +160,9 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
                       : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20"
                   )}
                 >
-                  {inCart ? <><Check className="h-4 w-4" /> In Cart</> : <><ShoppingCart className="h-4 w-4" /> Add to Cart</>}
+                  {inCart
+                    ? <><Check className="h-4 w-4" /> In Cart</>
+                    : <><ShoppingCart className="h-4 w-4" /> Add to Cart</>}
                 </motion.button>
               </div>
             </div>
@@ -158,6 +172,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
     );
   }
 
+  /* ── GRID LAYOUT ── */
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -169,7 +184,8 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
         className={cn(
           "relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-300",
           "border-border/50 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/8",
-          inCart && "border-emerald-500/30 shadow-lg shadow-emerald-500/5"
+          inCart && "border-emerald-500/30 shadow-lg shadow-emerald-500/5",
+          wishlisted && !inCart && "border-rose-500/20"
         )}
       >
         {/* Image */}
@@ -179,6 +195,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            priority={index === 0}
             className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
 
@@ -200,13 +217,20 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
             )}
           </div>
 
-          {/* Wishlist button */}
+          {/* Wishlist button — always visible when wishlisted, fades in on hover otherwise */}
           <motion.button
+            type="button"
             whileTap={{ scale: 0.82 }}
-            onClick={() => setWishlisted((v) => !v)}
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 opacity-0 shadow-sm backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
+            aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            onClick={handleToggleWishlist}
+            className={cn(
+              "absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full shadow-sm backdrop-blur-sm transition-all duration-200",
+              wishlisted
+                ? "bg-rose-500 opacity-100"
+                : "bg-background/80 opacity-0 group-hover:opacity-100"
+            )}
           >
-            <Heart className={cn("h-4 w-4 transition-colors duration-200", wishlisted ? "fill-rose-500 text-rose-500" : "text-muted-foreground")} />
+            <Heart className={cn("h-4 w-4 transition-colors duration-200", wishlisted ? "fill-white text-white" : "text-muted-foreground")} />
           </motion.button>
 
           {/* In-cart indicator */}
@@ -232,7 +256,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
             <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
               {product.category}
             </span>
-            <div className="flex items-center gap-1 shrink-0">
+            <div className="flex shrink-0 items-center gap-1">
               <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
               <span className="text-xs font-semibold text-foreground">{product.rating}</span>
               <span className="text-xs text-muted-foreground">({product.reviews.toLocaleString()})</span>
@@ -250,7 +274,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
           </p>
 
           {/* Price + CTA */}
-          <div className="mt-auto flex items-center justify-between gap-2 pt-3 border-t border-border/40">
+          <div className="mt-auto flex items-center justify-between gap-2 border-t border-border/40 pt-3">
             <div className="flex flex-col">
               <span className="text-lg font-extrabold text-foreground">${product.price.toFixed(2)}</span>
               {product.originalPrice && (
@@ -259,6 +283,7 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
             </div>
 
             <motion.button
+              type="button"
               whileTap={{ scale: 0.9 }}
               onClick={handleAddToCart}
               disabled={inCart}
@@ -269,11 +294,9 @@ export function ProductCard({ product, index, layout = "grid" }: ProductCardProp
                   : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/25"
               )}
             >
-              {inCart ? (
-                <><Check className="h-4 w-4" /> Added</>
-              ) : (
-                <><Zap className="h-4 w-4" /> Add</>
-              )}
+              {inCart
+                ? <><Check className="h-4 w-4" /> Added</>
+                : <><Zap className="h-4 w-4" /> Add</>}
             </motion.button>
           </div>
         </div>

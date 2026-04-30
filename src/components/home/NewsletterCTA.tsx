@@ -62,6 +62,7 @@ export function NewsletterCTA() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                suppressHydrationWarning
                 className="h-11 border-white/20 bg-white/10 text-white placeholder:text-white/50 focus-visible:border-white focus-visible:ring-white/30"
               />
               <Button
